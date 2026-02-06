@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ヤチヨのお部屋</title>
+  <style>
+    :root{
+      --left-bg:#f1d6a6;      
+      --left-pattern:#e9c47f; 
+      --main-bg:#8fd0e2;     
+      --bar:#1c6d86;         
+      --bar2:#134f63;
+      --ink:#0b2a33;
+      --link:#0d58c6;
+      --link2:#ff2b2b;
+      --panel:#dff4fb;       
+      --panel2:#ffffff;
+      --grid:#2d7f98;         
+      --shadow: rgba(0,0,0,.12);
+    }
+
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:var(--ink);
+      font-family: "MS PGothic","MS Pゴシック","ＭＳ Ｐゴシック", "MS Gothic", system-ui, sans-serif;
+      font-size:14px;
+      line-height:1.45;
+      background: var(--main-bg);
+    }
+
+    .page{
+      width: 100%;         
+      margin: 0;           
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar{
+      width: 240px;
+      padding: 18px 14px 20px;
+
+      background-color: var(--left-bg); 
+      background-image: url("./bg3.png");
+      background-repeat: repeat;
+      background-size: 60px 60px;  
+      background-position: 0 0;
+
+      border-right: 3px solid rgba(0,0,0,.08);
+    }
+
+    .side-title{
+      font-weight: 800;
+      letter-spacing: .5px;
+      margin: 6px 0 0px;
+      font-size: 18px;
+    }
+    .side-sub{
+      font-weight: 800;
+      font-size: 18px;
+      margin: 0 0 14px;
+    }
+
+    .menu{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .menu li{
+      margin: 30px 0;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .dia{
+      width: 10px;
+      height: 10px;
+      background:#d85c2a;
+      transform: rotate(45deg);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+      flex:0 0 auto;
+    }
+    .menu a{
+      color: var(--link);
+      text-decoration: underline;
+      font-weight: 700;
+    }
+    .menu a .new{
+      color: var(--link2);
+      font-weight: 900;
+      margin-left:6px;
+    }
+    .menu .hint{
+      font-size: 12px;
+      font-weight:800;
+      opacity:.85;
+      color: var(--link);
+      text-decoration: underline;    
+    }
+
+    .side-note{
+      margin-top: 18px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .banner{
+      margin-top: 14px;
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
+
+      display: flex;
+      justify-content: center;
+    }
+
+    .side-banner-img{
+      display: block;
+      max-width: 200px;
+      height: auto;
+      image-rendering: pixelated;
+    }
+
+     .main{
+      flex: 0 0 1120px;      
+      width: 980px;
+      padding: 0 0 22px;
+      min-width: 0;
+
+      background-color: var(--main-bg);
+      background-image: url("./background.png");
+      background-repeat: repeat;
+      background-size: 60px 60px;
+    }
+
+    .top{
+      padding: 18px 0px 0px;
+      text-align:center;
+      position:relative;
+    }
+
+    .top .welcome{
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+
+    .title{
+      margin: 6px 0 8px;
+      font-size: 44px;
+      letter-spacing: 2px;
+      color: #0b0f12;
+    }
+    .title .text{
+      margin: 3px 0 4px;
+      font-size: 44px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: #0b0f12;
+
+      
+      -webkit-text-stroke: 3px rgba(9, 12, 12, 0.95);
+
+      text-shadow:
+        -1px  0px 0 #0b0f12,
+        1px  0px 0 #0b0f12,
+        0px -1px 0 #0b0f12,
+        0px  1px 0 #0b0f12,
+        -1px -1px 0 #0b0f12,
+        1px -1px 0 #0b0f12,
+        -1px  1px 0 #0b0f12,
+        1px  1px 0 #0b0f12,        
+        2px  2px 0 rgba(8, 35, 45, .6),
+        4px  4px 0 rgba(8, 35, 45, .5),
+    }
+
+    .title .moon{
+      font-weight: normal;          
+      -webkit-text-stroke: 0;      
+      text-shadow:
+        1px 1px 0 rgba(8,35,45,.25); 
+    }
+
+    .bar{
+      margin: 0px 0 0px;
+      background: linear-gradient(var(--bar), var(--bar2));
+      color:#fff;
+      text-align:center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing:.4px;
+      position:relative;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .bar::before, .bar::after{
+      content:"";
+      position:absolute;
+      top:0; bottom:0;
+      width: 8px;
+      background: rgba(255,255,255,.12);
+    }
+    .bar::before{ left:0; }
+    .bar::after{ right:0; }
+
+    .stars {
+      display: inline-flex;
+      gap: 2px;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+
+    .s {
+      font-family: "MS Gothic", "MS PGothic", sans-serif;
+    }
+
+    .orange { color: #aa6600; }  
+    .green  { color: #008542; }  
+    .purple { color: #422086; }  
+
+    .counter{
+      text-align:center;
+      margin: 0px 0 0px;
+      font-weight: 800;
+    }
+        
+    .counter-site{
+      margin-top: 2px;
+      font-size: 6px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: rgba(0,0,0,.35);
+      text-align: center;
+    }
+    .digits{
+      display:inline-flex;
+      gap:2px;
+      vertical-align:middle;
+      margin: 0 6px;
+    }
+    .digit{
+      width: 18px;
+      height: 22px;
+      background:#061a0a;
+      border: 1px solid rgba(0,0,0,.35);
+      box-shadow: inset 0 0 0 2px rgba(0,255,0,.12);
+      color:#49ff49;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      display:grid;
+      place-items:center;
+      font-size: 16px;
+      line-height:1;
+    }
+
+    .hero{
+      display: grid;
+      grid-template-columns: 500px 360px; 
+      gap: 0px;
+      padding: 0 18px;
+      justify-content: center;          
+      align-items: start;
+    }
+
+     .illust{
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      width: 500px; 
+    }
+
+    .illust .frame{
+      width: 500px;
+      height: 252px;                 
+      background: #6aa6bf;
+      border: 1px solid rgba(0,0,0,.25);
+      position: relative;
+      overflow: hidden;
+    }
+    .yachiyo-img{
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;      
+      object-position: center;
+    }
+
+    .blob{
+      position:absolute;
+      left: 56%;
+      top: 52%;
+      transform: translate(-50%,-50%);
+      width: 210px;
+      height: 150px;
+      border-radius: 120px 120px 90px 90px;
+      background: #fff;
+      border: 3px solid rgba(0,0,0,.25);
+      box-shadow: 0 10px 0 rgba(0,0,0,.08);
+    }
+    .blob::before{
+      content:"";
+      position:absolute;
+      width: 18px; height: 18px;
+      border: 3px solid rgba(0,0,0,.25);
+      border-left:0; border-bottom:0;
+      border-radius: 18px;
+      left: 72px; top: 22px;
+      transform: rotate(-35deg);
+      background: transparent;
+    }
+    .blob::after{
+      content:"";
+      position:absolute;
+      width: 16px; height: 16px;
+      border: 3px solid rgba(0,0,0,.25);
+      border-right:0; border-bottom:0;
+      border-radius: 18px;
+      left: 112px; top: 20px;
+      transform: rotate(35deg);
+      background: transparent;
+    }
+    .face{
+      position:absolute;
+      left: 92px; top: 66px;
+      width: 70px; height: 40px;
+      color:#000;
+      font-weight:900;
+      font-size: 22px;
+      letter-spacing:2px;
+    }
+    .face span{ display:inline-block; transform: translateY(-2px); }
+    .caption{
+      margin-top: 6px;
+      text-align:center;
+      font-size: 12px;
+      font-weight: 800;
+      color:#0b3b49;
+    }
+    
+     .news{
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      width: 360px;
+    }
+
+    .biglink .em{
+      color: #b51751;   
+      font-weight: 900;
+    }
+
+    .news .box{
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.25);
+      height: 140px;         
+      overflow: auto;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-left: 7px;
+      margin-bottom: 30px;
+    }
+
+    .news ul{ margin:0; padding-left: 18px; }
+    .news li{ margin: 6px 0; }
+    .webclap{
+      margin-top: 10px;
+      text-align:center;
+      line-height: 1;          
+    }
+
+    .webclap button{
+      font-family: inherit;
+      font-weight: 900;
+      background: #ffef9c;
+      border: 2px solid rgba(0,0,0,.25);
+      cursor:pointer;
+      box-shadow: 0 6px 0 rgba(0,0,0,.08);
+      display: inline-block;
+      margin: 0;               
+    }
+    .webclap button:active{
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 rgba(0,0,0,.08);
+    }
+
+    .clap-block{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;                 
+      line-height: 1;
+    }
+
+    .biglink{
+      margin-top: 0px;         
+      text-align: center;
+      font-size: 15px;         
+      font-weight: 700;
+      letter-spacing: .5px;
+      line-height: 1.05;
+      color: #0b2a33;
+      font-family: "Meiryo", "メイリオ";
+
+    }
+
+    .biglink .star{
+      color:#000;
+      margin: 0 4px;
+    }
+
+    .biglink a{
+      display:inline-block;
+      margin-top: 6px;
+      color:#1e40af;
+      text-decoration: underline;
+      font-weight: 900;
+    }
+
+    .clap-note{
+      margin: 2px 0 0;        
+      font-size: 10px;         
+      font-weight: 700;
+      color: #0b2a33;
+      line-height: 1.1;
+    }
+
+    .notice{
+      padding: 0 18px;
+      margin-top: 6px;
+      text-align:center;
+    }
+    .notice h3{
+      margin: 10px 0 6px;
+      font-size: 18px;
+      font-weight: 900;
+    }
+    .notice p{
+      margin: 0 auto 10px;
+      max-width: 720px;
+      font-size: 12px;
+    }
+
+    .navtable{
+      width: 720px;
+      margin: 0 auto;
+      border-collapse: separate;  
+      border-spacing: 0;
+      background: transparent;
+      border: 2px solid #2d7f98;
+      outline: 1px solid #e9f6fb;
+      outline-offset: -4px;
+      box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.35),
+        2px 2px 0 rgba(0,0,0,.08);
+    }
+
+
+    .navtable{
+      box-shadow:
+        inset 0 0 0 2px rgba(255,255,255,.55), 
+        inset 0 2px 0 rgba(255,255,255,.30),     
+        inset 0 -2px 0 rgba(0,0,0,.10);         
+    }
+
+    .navtable th,
+    .navtable td{
+      background: transparent;  
+      padding: 10px 12px;
+      font-size: 13px;
+      vertical-align: middle;
+      border-right: 2px solid rgba(34, 92, 120, .55);
+      border-bottom: 2px solid rgba(34, 92, 120, .55);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.35);
+    }
+
+    .navtable tr > *:last-child{ border-right: 0; }
+    .navtable tr:last-child > *{ border-bottom: 0; }
+
+    .navtable th{
+      text-align: center;
+      font-weight: 900;
+      background: rgba(255,255,255,.15);
+      box-shadow:
+        inset 1px 1px 0 rgba(255,255,255,.8),
+        inset -1px -1px 0 rgba(0,0,0,.25);
+    }
+
+    .navtable td:first-child{
+      width: 140px;
+      font-weight: 900;
+      color: var(--link);
+      text-decoration: underline;
+      background: transparent;
+    }
+
+    .foot{
+      text-align:center;
+      font-size: 12px;
+      opacity:.8;
+      margin-top: 18px;
+    }
+    .game-disabled{
+      text-decoration: line-through;
+    }
+
+    @media (max-width: 1020px){
+      .page{ width: 100%; }
+    }
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+      .navtable{ width: calc(100% - 36px); }
+    }
+
+    .title{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;           
+    }
+
+
+    .title-doge{
+      width: 40px;         
+      height: auto;
+      image-rendering: pixelated; 
+      vertical-align: middle;
+      position: relative;
+      top: 2px;
+    }
+
+
+    .title-doge.left{
+      margin-right: 4px;
+    }
+
+    .title-doge.right{
+      margin-left: 4px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <aside class="sidebar">
+      <div class="side-title">☽ヤチヨ☾のお部屋</div>
+      <div class="side-sub">-MENU-</div>
+
+      <ul class="menu">
+        <li><span class="dia"></span><a href="#">トップ</a></li>
+        <li><span class="dia"></span><a href="#">ぷるふぃ〜る</a><span class="hint">・100の質問</span></li>
+        <li><span class="dia"></span><a href="#">ぎゃらり〜</a><span class="new">New!</span></li>
+        <li><span class="dia"></span><a href="#">おえかきBBS/BBS</a></li>
+        <li><span class="dia"></span><a href="#">絵茶</a><span class="hint">※利用規約→必読</span></li>
+        <li><span class="dia"></span><span style="font-weight:900;text-decoration: line-through;">ゲーム置き場</span><span class="hint">　工事中</span></li>
+        <li style="margin-top:14px;"><span class="dia"></span><a href="#">リンク集</a><span class="new">New!</span></li>
+      </ul>
+
+      <div class="side-note">
+        当サイトはリンクフリー。<br/>
+        相互さま大歓迎☆<br/>
+        バナーは保存してお使いくださいね。<br/>
+        <span style="font-weight:900;">※直リン厳禁※</span>
+      </div>
+
+      <div class="banner" title="バナー">
+        <img src="bg4.png" alt="ヤチヨのお部屋" class="side-banner-img">
+      </div>
+
+    </aside>
+
+    <main class="main">
+      <section class="top">
+        <h1 class="title">
+          <img src="DOGE1.png" alt="" class="title-doge left">
+          <span class="moon">☽</span>
+          <span class="text">ヤチヨ</span>
+          <span class="moon">☾</span>
+          <span class="text">のお部屋</span>
+          <img src="DOGE2.png" alt="" class="title-doge right">
+        </h1>
+
+        <div class="welcome">★★★ようこそ！当サイトは管理人ヤチヨが運営する、二次創作を中心としたイラスト交流サイトです★★★</div>
+        <div class="bar">
+          <span class="stars left">
+            <span class="s orange">★</span>
+            <span class="s green">★</span>
+            <span class="s purple">★</span>
+          </span>
+
+          <span class="bar-text">無断転載・無断複製禁止</span>
+
+          <span class="stars right">
+            <span class="s purple">★</span>
+            <span class="s green">★</span>
+            <span class="s orange">★</span>
+          </span>
+        </div>
+
+        <div class="counter">
+            あなたは
+            <span style="display:inline-block; vertical-align:middle; margin:0 6px;">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td align="center">
+                    <a href="http://www.rays-counter.com/">
+                      <img
+                        src="http://www.rays-counter.com/d1305_f6_022/698594a451000/"
+                        alt="アクセスカウンター"
+                        border="0"
+                      >
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </span>
+
+            番目のお客様です！
+            <div class="counter-site">RAYS-COUNTER.COM</div>
+
+            <div style="font-size:12px; margin-top:4px; font-weight:800;">
+              キリ番報告は
+              <span style="color:var(--link); text-decoration:underline;">拍手</span>
+              もしくは
+              <span style="color:var(--link); text-decoration:underline;">BBS</span>
+              まで
+            </div>
+          </div>
+
+      </section>
+
+      <section class="hero">
+        <div class="illust">
+          <div class="frame">
+            <img
+                src="yachiyo.png"
+                alt="ヤチヨ"
+                class="yachiyo-img"
+              />
+          </div>
+          <div class="caption">今月のイラスト作者様：ぼげげげ様</div>
+        </div>
+
+        <div class="news">
+          <div class="box">
+            <ul>
+              <li>2003年10月13日　ぎゃらり〜に1枚追加しました！</li>
+              <li>2003年10月12日　リンク集に新しいリンクを追加しました！</li>
+              <li>2003年10月11日　web拍手の絵を変更しました！</li>
+              <li>2003年10月10日　トップのデザインをリニューアルしました！</li>
+              <li>・・・</li>
+            </ul>
+          </div>
+          <div class="webclap">
+            <button type="button">Web拍手</button>
+            <div class="clap-block">
+            <div class="clap-note">★↑応援メッセージなどお待ちしております★</div>
+          </div>
+          <div class="biglink">
+            <span class="star">★</span><span class="em">合同絵茶</span>の開催スケジュールは<a href="#">こちら</a><span class="star">★</span><br/>           
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="notice">
+        <h3>◆お知らせ◆</h3>
+        <p>
+          肌寒い季節になってきましたが、神々のみんなは元気にお過ごしですか？<br/>
+          （ヤチヨはキモチのいい外の気温がわかりません（>_<））<br/>
+          近々サイトリニューアルを予定しております！時期は未定ですが、近づいたらまたお知らせしますね。<br/>
+          相互リンク随時募集中☆　ご連絡はBBSまで！
+        </p>
+
+        <table class="navtable" role="presentation">
+          <tr>
+            <th>ページ</th>
+            <th>説明</th>
+          </tr>
+          <tr>
+            <td>トップ</td>
+            <td>ここだよー♪</td>
+          </tr>
+          <tr>
+            <td>ぷるふぃ〜る</td>
+            <td>これを見れば管理人ヤチヨの全部がわかる！？要チェック☆</td>
+          </tr>
+          <tr>
+            <td>ぎゃらり〜</td>
+            <td>神々のみんな（ここにきてくれるみんなだよ♪）からもらった素敵すぎるイラスト展示中！</td>
+          </tr>
+          <tr>
+            <td>おえかきBBS/BBS</td>
+            <td>ご意見ご要望は掲示板まで♪ おえかき掲示板ではみんなの天才絵が大募集中！</td>
+          </tr>
+          <tr>
+            <td>絵茶</td>
+            <td>お絵かきチャットだよ。仲良く集まるために、利用規約を読んでね☆</td>
+          </tr>
+          <tr>
+            <td class="game-disabled">ゲーム置き場</td>
+            <td>ヤチヨが作ったゲームや、面白かったゲームをご紹介〜♪　現在工事中……。</td>
+          </tr>
+          <tr>
+            <td>リンク集</td>
+            <td>当サイトはリンクフリー。相互さま大歓迎☆ バナーは保存してお使いくださいね。</td>
+          </tr>
+        </table>
+
+        <div class="foot">© ヤチヨのお部屋 / since 2003</div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
